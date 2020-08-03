@@ -1,0 +1,18 @@
+#!/bin/bash
+#PBS -d /beegfs/car/lsmith/virac_v2/tmp/weirdo
+#PBS -l nodes=smp3:ppn=32
+#PBS -N weirdofit
+#PBS -l walltime=12:00:00
+#PBS -l pmem=1G
+#PBS -q smp
+#PBS -j eo
+#PBS -V
+#PBS -M l.smith0607@gmail.com
+#PBS -m bea
+
+# make sure python3 is set up correctly (it should be anyway)
+source /home/lsmith/bin/exec_py3
+/home/lsmith/miniconda3/bin/activate
+
+# Launch using the hosts
+python3 dio_fit.py 32
