@@ -214,17 +214,19 @@ if __name__=="__main__":
     }
 
     t_model = np.linspace(imjdobs.min(), imjdobs.max(), 1000)
-    f_model = model_eclipse(mjd_points=t_model, **kwargs).get_lc(x_model)
-    f_plot_i = model_eclipse(mjd_points=imjdobs, **kwargs).get_lc(x_model)
-    f_plot_v = model_eclipse(mjd_points=vmjdobs, **kwargs).get_lc(x_model)
-    f_plot_k = model_eclipse(mjd_points=kmjdobs, **kwargs).get_lc(x_model)
+    f_model_i = model_eclipse(mjd_points=t_model, mu=1.1, **kwargs).get_lc(x_model)
+    f_model_v = model_eclipse(mjd_points=t_model, mu=1.2, **kwargs).get_lc(x_model)
+    f_model_k = model_eclipse(mjd_points=t_model, mu=1.05, **kwargs).get_lc(x_model)
+    f_plot_i = model_eclipse(mjd_points=imjdobs, mu=1.1, **kwargs).get_lc(x_model)
+    f_plot_v = model_eclipse(mjd_points=vmjdobs, mu=1.2, **kwargs).get_lc(x_model)
+    f_plot_k = model_eclipse(mjd_points=kmjdobs, mu=1.05, **kwargs).get_lc(x_model)
 
     fig = plt.figure(figsize=(10,5))
 
     ax1 = plt.subplot(211)
-    plt.plot(t_model, f_model, label='Model', c='k')
-    plt.plot(t_model, f_model+1.0, label='Model', c='k')
-    plt.plot(t_model, f_model+2.0, label='Model', c='k')
+    plt.plot(t_model, f_model_v, label='V model', c='k')
+    plt.plot(t_model, f_model_i+1.0, label='I model', c='k')
+    plt.plot(t_model, f_model_k+2.0, label='Ks model', c='k')
     plt.scatter(vmjdobs,vflux,s=3,label='V flux',zorder=102)
     plt.scatter(imjdobs,iflux+1.0,s=3,label='I flux',zorder=100)
     plt.scatter(kmjdobs,kflux+2.0,s=3,label='Ks flux',zorder=101)
